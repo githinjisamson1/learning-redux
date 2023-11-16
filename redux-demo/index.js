@@ -4,15 +4,25 @@ const redux = require("redux");
 // !createStore
 const createStore = redux.createStore;
 
+// !bindActionCreators
+const bindActionCreators = redux.bindActionCreators;
+
+// !combineReducers
+const combineReducers = redux.combineReducers;
+
 // 1. action
 // 2. reducer
 // 3. store
 
-// !actionConstant
+// !cakeActionConstants
 const CAKE_ORDERED = "CAKE_ORDERED";
 const CAKE_RESTOCKED = "CAKE_RESTOCKED";
 
-// !actionCreator: function that returns an action
+// !iceCreamActionConstants
+const ICE_CREAM_ORDERED = "ICE_CREAM_ORDERED";
+const ICE_CREAM_RESTOCKED = "ICE_CREAM_RESTOCKED";
+
+// !cakeActionCreators: function that returns an action
 const orderCake = () => {
   // action: obj having type/payload property
   return {
@@ -29,13 +39,35 @@ const restockCake = (quantity) => {
   };
 };
 
-// !initialState
-const initialState = {
+// !iceCreamActioCreators
+const orderIceCream = (quantity = 1) => {
+  // action: obj having type/payload property
+  return {
+    type: ICE_CREAM_ORDERED,
+    payload: quantity,
+  };
+};
+
+// restockCake
+const restockIceCream = (quantity) => {
+  return {
+    type: ICE_CREAM_RESTOCKED,
+    payload: quantity,
+  };
+};
+
+// !initialCakeState
+const initialCakeState = {
   numberOfCakes: 10,
 };
 
-// !reducer: (previousState, action) => newState/initialState passed as default value
-const reducer = (state = initialState, action) => {
+// !initialIceCreamState
+const initialIceCreamState = {
+  numberOfIceCreams: 5,
+};
+
+// !cakeReducer: (previousState, action) => newState/initialState passed as default value
+const cakeReducer = (state = initialCakeState, action) => {
   switch (action.type) {
     case CAKE_ORDERED:
       // spread oldState return newState
@@ -54,8 +86,35 @@ const reducer = (state = initialState, action) => {
   }
 };
 
+// !iceCreamReducer
+const iceCreamReducer = (state = initialIceCreamState, action) => {
+  switch (action.type) {
+    case ICE_CREAM_ORDERED:
+      // spread oldState return newState
+      return {
+        ...state,
+        numberOfIceCreams: state.numberOfIceCreams - action.payload,
+      };
+    case ICE_CREAM_RESTOCKED:
+      return {
+        ...state,
+        numberOfIceCreams: state.numberOfIceCreams + action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+// !rootReducer
+const rootReducer = combineReducers({
+  // rename/alias
+  cake: cakeReducer,
+  iceCream: iceCreamReducer,
+});
+
 // !store: createStore(reducer)
-const store = createStore(reducer);
+const store = createStore(rootReducer);
 
 // !store.getState()
 console.log("Initial state", store.getState());
@@ -75,6 +134,19 @@ store.dispatch({ type: CAKE_ORDERED, payload: 1 });
 
 // !restock
 store.dispatch(restockCake(4));
+
+// !actions: bindActionCreators({ orderCake, restockCake }, store.dispatch);
+// not necessary/adds bolierplate
+// const actions = bindActionCreators({ orderCake, restockCake, orderIceCream, restockIceCream }, store.dispatch);
+// actions.orderCake();
+// actions.orderCake();
+// actions.orderCake();
+// actions.orderCake();
+// actions.restockCake(5);
+
+store.dispatch(orderIceCream());
+store.dispatch(orderIceCream());
+store.dispatch(restockIceCream(2));
 
 // !unsubscribe
 unsubscribe();
