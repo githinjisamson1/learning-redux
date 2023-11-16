@@ -10,6 +10,7 @@ const createStore = redux.createStore;
 
 // !actionConstant
 const CAKE_ORDERED = "CAKE_ORDERED";
+const CAKE_RESTOCKED = "CAKE_RESTOCKED";
 
 // !actionCreator: function that returns an action
 const orderCake = () => {
@@ -17,6 +18,14 @@ const orderCake = () => {
   return {
     type: CAKE_ORDERED,
     payload: 1,
+  };
+};
+
+// restockCake
+const restockCake = (quantity) => {
+  return {
+    type: CAKE_RESTOCKED,
+    payload: quantity,
   };
 };
 
@@ -33,6 +42,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         numberOfCakes: state.numberOfCakes - action.payload,
+      };
+    case CAKE_RESTOCKED:
+      return {
+        ...state,
+        numberOfCakes: state.numberOfCakes + action.payload,
       };
 
     default:
@@ -59,8 +73,13 @@ store.dispatch(orderCake());
 // !alternatively/cannot be re-used
 store.dispatch({ type: CAKE_ORDERED, payload: 1 });
 
+// !restock
+store.dispatch(restockCake(4));
+
 // !unsubscribe
 unsubscribe();
 
 // !unreachable since we have already unsubscribed to the changes
 // store.dispatch(orderCake(1));
+
+// !!! NEVER MUTATE STATE/ALWAYS RETURN A NEW STATE/COPY FIRST THEN MAKE CHANGES
