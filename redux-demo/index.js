@@ -10,6 +10,7 @@ const bindActionCreators = redux.bindActionCreators;
 // !combineReducers
 const combineReducers = redux.combineReducers;
 
+// TODO: REDUX STEPS
 // 1. action
 // 2. reducer
 // 3. store
@@ -39,7 +40,7 @@ const restockCake = (quantity) => {
   };
 };
 
-// !iceCreamActioCreators
+// !iceCreamActionCreators
 const orderIceCream = (quantity = 1) => {
   // action: obj having type/payload property
   return {
@@ -119,7 +120,7 @@ const store = createStore(rootReducer);
 // !store.getState()
 console.log("Initial state", store.getState());
 
-// !store.subscribe(()=>{})/listener
+// !store.subscribe(()=>{})/listener/subscribing to any change(s)
 const unsubscribe = store.subscribe(() => {
   console.log("Updated state", store.getState());
 });
@@ -136,7 +137,7 @@ store.dispatch({ type: CAKE_ORDERED, payload: 1 });
 store.dispatch(restockCake(4));
 
 // !actions: bindActionCreators({ orderCake, restockCake }, store.dispatch);
-// not necessary/adds bolierplate
+// not necessary/adds boilerplate
 // const actions = bindActionCreators({ orderCake, restockCake, orderIceCream, restockIceCream }, store.dispatch);
 // actions.orderCake();
 // actions.orderCake();
@@ -154,4 +155,4 @@ unsubscribe();
 // !unreachable since we have already unsubscribed to the changes
 // store.dispatch(orderCake(1));
 
-// !!! NEVER MUTATE STATE/ALWAYS RETURN A NEW STATE/COPY FIRST THEN MAKE CHANGES
+// !!! NEVER MUTATE STATE/ALWAYS RETURN A NEW STATE/COPY FIRST THEN MAKE CHANGES (UPDATE)
