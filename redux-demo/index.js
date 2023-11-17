@@ -10,6 +10,13 @@ const bindActionCreators = redux.bindActionCreators;
 // !combineReducers
 const combineReducers = redux.combineReducers;
 
+// !applyMiddleware
+const applyMiddleware = redux.applyMiddleware;
+
+// !reduxLogger
+const reduxLogger = require("redux-logger");
+const logger = reduxLogger.createLogger();
+
 // TODO: REDUX STEPS
 // 1. action
 // 2. reducer
@@ -114,15 +121,15 @@ const rootReducer = combineReducers({
   iceCream: iceCreamReducer,
 });
 
-// !store: createStore(reducer)
-const store = createStore(rootReducer);
+// !store: createStore(reducer)/applyMiddleware(...listOfMiddleware)
+const store = createStore(rootReducer, applyMiddleware(logger));
 
 // !store.getState()
 console.log("Initial state", store.getState());
 
 // !store.subscribe(()=>{})/listener/subscribing to any change(s)
 const unsubscribe = store.subscribe(() => {
-  console.log("Updated state", store.getState());
+  // console.log("Updated state", store.getState());
 });
 
 // !store.dispatch(actionCreator())
