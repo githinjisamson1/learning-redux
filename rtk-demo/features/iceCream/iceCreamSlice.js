@@ -24,4 +24,4 @@ const iceCreamSlice = createSlice({
 module.exports = iceCreamSlice.reducer;
 
 // named export
-module.exports.iceCreamActions = cakeSlice.actions;
+module.exports.iceCreamActions = iceCreamSlice.actions;

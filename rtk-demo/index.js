@@ -4,6 +4,10 @@ const store = require("./app/store");
 // import cakeActions
 const cakeActions = require("./features/cake/cakeSlice").cakeActions;
 
+// import iceCreamActions
+const iceCreamActions =
+  require("./features/iceCream/iceCreamSlice").iceCreamActions;
+
 // getState()
 console.log("Initial state", store.getState());
 
@@ -17,6 +21,10 @@ store.dispatch(cakeActions.ordered(1));
 store.dispatch(cakeActions.ordered(1));
 store.dispatch(cakeActions.ordered(1));
 store.dispatch(cakeActions.restocked(3));
+
+store.dispatch(iceCreamActions.ordered(1));
+store.dispatch(iceCreamActions.ordered(1));
+store.dispatch(iceCreamActions.restocked(2));
 
 // unsubscribe
 unsubscribe();
