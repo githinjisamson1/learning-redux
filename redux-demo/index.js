@@ -116,7 +116,7 @@ const iceCreamReducer = (state = initialIceCreamState, action) => {
 
 // !rootReducer
 const rootReducer = combineReducers({
-  // rename/alias
+  // pass in allReducers
   cake: cakeReducer,
   iceCream: iceCreamReducer,
 });
