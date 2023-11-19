@@ -31,11 +31,10 @@ const fetchUsers = createAsyncThunk("users/fetchUsers", () => {
   //     });
 
   // TODO: axios.get()
-  return axios.get("https://jsonplaceholder.typicode.com/users")
+  return axios
+    .get("https://jsonplaceholder.typicode.com/users")
     .then((response) => {
-      return response.data.map((user) => {
-        return user.id;
-      });
+      return response.data;
     });
 });
 
