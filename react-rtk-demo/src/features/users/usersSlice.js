@@ -1,10 +1,10 @@
 // createSlice
-const createSlice = require("@reduxjs/toolkit").createSlice;
+import { createSlice } from "@reduxjs/toolkit";
 
 // !import createAsyncThunk
-const createAsyncThunk = require("@reduxjs/toolkit").createAsyncThunk;
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const axios = require("axios");
+import axios from "axios";
 
 // initialState
 const initialState = {
@@ -31,8 +31,7 @@ const fetchUsers = createAsyncThunk("users/fetchUsers", () => {
   //     });
 
   // TODO: axios.get()
-  return axios
-    .get("https://jsonplaceholder.typicode.com/users")
+  return axios.get("https://jsonplaceholder.typicode.com/users")
     .then((response) => {
       return response.data.map((user) => {
         return user.id;
@@ -68,10 +67,11 @@ const usersSlice = createSlice({
 });
 
 // default export
-module.exports = usersSlice.reducer;
+export default usersSlice.reducer;
 
 // named export
-module.exports.fetchUsers = fetchUsers;
+const _fetchUsers = fetchUsers;
+export { _fetchUsers as fetchUsers };
 
 // createAsyncThunk(actionType, ()=>{{return axios.get()}})
 // createAsyncThunk dispatches LFC actions we can listen to using extraReducers

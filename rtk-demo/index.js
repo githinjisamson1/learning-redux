@@ -8,6 +8,7 @@ const cakeActions = require("./features/cake/cakeSlice").cakeActions;
 const iceCreamActions =
   require("./features/iceCream/iceCreamSlice").iceCreamActions;
 
+// import fetchUsers
 const fetchUsers = require("./features/users/usersSlice").fetchUsers;
 
 // getState()
@@ -18,7 +19,8 @@ const unsubscribe = store.subscribe(() => {
   console.log("Updated state", store.getState());
 });
 
-// dispatch()
+// !dispatch()
+
 // store.dispatch(cakeActions.ordered(1));
 // store.dispatch(cakeActions.ordered(1));
 // store.dispatch(cakeActions.ordered(1));
