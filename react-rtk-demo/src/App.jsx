@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react";
+import CakeView from "./features/cake/CakeView";
+import IceCreamView from "./features/iceCream/IceCreamView";
+import UsersView from "./features/users/UsersView";
 
 const App = () => {
   return (
-    <div>App</div>
-  )
-}
+    <>
+      <CakeView />
+      <IceCreamView />
+      <UsersView />
+    </>
+  );
+};
 
-export default App
+export default App;
