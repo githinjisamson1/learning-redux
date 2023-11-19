@@ -19,7 +19,7 @@ const IceCreamView = () => {
       <h1>Number of ice creams - {numberOfIceCreams}</h1>
       <button
         onClick={() => {
-          dispatch(iceCreamActions.ordered(value));
+          dispatch(iceCreamActions.ordered(parseInt(value)));
         }}
       >
         Order ice cream
@@ -33,7 +33,7 @@ const IceCreamView = () => {
       />
       <button
         onClick={() => {
-          dispatch(iceCreamActions.restocked(value));
+          dispatch(iceCreamActions.restocked(parseInt(value)));
         }}
       >
         Restock ice cream
