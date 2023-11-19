@@ -14,6 +14,7 @@ import usersReducer from "../features/users/usersSlice";
 import { createLogger } from "redux-logger";
 const logger = createLogger();
 
+
 // store
 const store = configureStore({
   reducer: {
